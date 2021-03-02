@@ -7,10 +7,11 @@ namespace BaristaApi
         static void Main(string[] args)
         {
 
+
             new FluentEspresso()
                 .AddWater(5)
                 .AddMilk()
-                .AddBeans(5)
+                .AddBeans( 5, Bean.CoffeSort.Robusta)
                 .ToBeverage();
 
             
