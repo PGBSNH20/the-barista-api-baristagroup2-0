@@ -1,21 +1,56 @@
 using System;
 
-public interface H2O
+public interface IH2O
+{
+    public IH2O setTemp(int temp){
+        if (temp < 0)
+        {
+            return new Ice();
+        }
+        else if (temp>100)
+        {
+            return new Steam();
+        }
+        else
+        {
+            return new Water();
+        }
+    };
+}
+
+public class Ice : IH2O
 {
 
 }
 
-public class Ice
+public class Water : IH2O
 {
 
 }
 
-public class Water
+public class Steam : IH2O
 {
 
 }
 
-public class Steam
-{
+/*
+IBeverage espresso = new FluentEspresso()
+                            .AddWater(20)
+                            .AddBeans(new Bean(){ 
+                                AmountInG = 5,
+                                Sort = CoffeSorts.Robusta})
+    						.Validate(e => e.Temerature > 90)
+                        .ToBeverage();
+// espresso is type of Espresso
 
-}
+IBeverage latte = new FluentEspresso()
+                            .AddBeans(new Bean(){ 
+                                AmountInG = 5,
+                                Sort = CoffeSorts.Robusta})
+                            .GrindBeans()
+                            .AddWater(20)
+                            .AddMilk()
+       						.Validate(e => e.Temerature < 80)
+                        .ToBeverage();
+// latte is type of Latte
+*/
