@@ -8,11 +8,15 @@ namespace BaristaApi
         {
 
 
-            new FluentEspresso()
-                .AddWater(5)
-                .AddMilk()
-                .AddBeans( 5, Bean.CoffeSort.Robusta)
-                .ToBeverage();
+            IBeverage espresso = new FluentEspresso()
+                 .AddWater(5)
+                 .AddBeans(5, Bean.CoffeSort.Robusta)
+                 .ToBeverage();
+
+            Console.WriteLine(espresso);
+                 
+
+                //.ToBeverage();
 
             
             /* pseudo-code
