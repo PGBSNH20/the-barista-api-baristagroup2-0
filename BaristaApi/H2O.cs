@@ -2,33 +2,37 @@ using System;
 
 public interface IH2O
 {
-    public IH2O setTemp(int temp){
-        if (temp < 0)
-        {
-            return new Ice();
-        }
-        else if (temp>100)
-        {
-            return new Steam();
-        }
-        else
-        {
-            return new Water();
-        }
-    };
-}
-
-public class Ice : IH2O
-{
-
+    public IH2O setTemp(int temp);
 }
 
 public class Water : IH2O
 {
+    public IH2O setTemp(int temp)
+    {
+        if (temp < 0)
+        {
+            return new Ice();
+        }
+        else if (temp > 100)
+        {
+            return new Steam();
+        }
+
+        else
+        {
+            return new Water();
+        }
+    }
+}
+public class Ice : Water
+{
+   
+
 
 }
 
-public class Steam : IH2O
+
+public class Steam : Water
 {
 
 }

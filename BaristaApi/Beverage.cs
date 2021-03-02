@@ -1,23 +1,32 @@
 using System.Collections.Generic;
 
 public interface IBeverage{
-	List<string> Ingredients { get; }
+	
     string CupType { get; }
 
-    public IBeverage AddWater();
-    public IBeverage BoilWater();
-    public IBeverage GrindBeans();
-    public IBeverage AddBeans();
-    public IBeverage AddMilk();
+    IBeverage AddWater(int amountWater);
+    IBeverage AddBeans(int bean);
+    IBeverage AddMilk();
+
+   
 }
+
 
 class Espresso : IBeverage
 {
-    public List<string> Ingredients => throw new System.NotImplementedException();
+    private IEnumerable<Ingredient> Ingredients { get; set; }
 
     public string CupType => throw new System.NotImplementedException();
 
-    public IBeverage AddBeans()
+  
+    public IBeverage AddWater(int amountOfWater)
+    {
+        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 30, Name = "Water" });
+        return this;
+
+    }
+
+    public IBeverage AddBeans(int bean)
     {
         throw new System.NotImplementedException();
     }
@@ -27,20 +36,7 @@ class Espresso : IBeverage
         throw new System.NotImplementedException();
     }
 
-    public IBeverage AddWater()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IBeverage BoilWater()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IBeverage GrindBeans()
-    {
-        throw new System.NotImplementedException();
-    }
+   
 }
 
 class Latte : IBeverage
@@ -50,28 +46,5 @@ class Latte : IBeverage
 
     public string CupType => throw new System.NotImplementedException();
 
-    public IBeverage AddBeans()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IBeverage AddMilk()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IBeverage AddWater()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IBeverage BoilWater()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public IBeverage GrindBeans()
-    {
-        throw new System.NotImplementedException();
-    }
+   
 }
