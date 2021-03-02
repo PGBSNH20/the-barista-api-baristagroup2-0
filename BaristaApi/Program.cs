@@ -7,18 +7,39 @@ namespace BaristaApi
         static void Main(string[] args)
         {
 
+            
 
             IBeverage espresso = new FluentEspresso()
                  .AddWater(5)
-                 .AddBeans(new Bean(){AmountInG = 5, Sort = Bean.CoffeSort.Robusta})
+                 .AddBeans(new Bean() { AmountInG = 5, Sort = Bean.CoffeSort.Robusta })
+                 .MyIngredients()
                  .ToBeverage();
+            Console.WriteLine();
 
-            Console.WriteLine(espresso);
-                 
+            IBeverage latte = new FluentEspresso()
+               .AddWater(5)
+               .AddBeans(new Bean() { AmountInG = 5, Sort = Bean.CoffeSort.Robusta })
+               .AddMilk()
+               .MyIngredients()
+               .ToBeverage();
 
-                //.ToBeverage();
+            Console.WriteLine();
 
-            
+            IBeverage americano = new FluentEspresso()
+               .AddWater(5)
+               .AddWater(5)
+               .AddBeans(new Bean() { AmountInG = 5, Sort = Bean.CoffeSort.Robusta })
+               .MyIngredients()
+               .ToBeverage();
+
+         
+            //Console.WriteLine(espresso);
+
+
+
+            //.ToBeverage();
+
+
             /* pseudo-code
             Espresso espresso = new Espresso().AddWater(20).AddBeans(b => b.AmountInG = 5 && b.Sort = CoffeSorts.Robusta).ToBravage();
             //espresso is type of Espresso
