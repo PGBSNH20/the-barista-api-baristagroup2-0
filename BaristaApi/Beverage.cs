@@ -13,6 +13,7 @@ public interface IBeverage{
     IBeverage AddMilkFoam();
     IBeverage AddChocolate();
     IBeverage ToBeverage();
+    IBeverage MyIngredients();
 }
 public class FluentEspresso : IBeverage
 {
@@ -68,7 +69,7 @@ public class FluentEspresso : IBeverage
     //     Ingredients.Add(temperature.ToString());
     //     return this;
     // }
-    IBeverage ToBeverage()
+    public IBeverage ToBeverage()
     {
 
         if (!Ingredients.Contains("water") || this.Bean == null)
@@ -76,13 +77,63 @@ public class FluentEspresso : IBeverage
             System.Console.WriteLine("You failed to add the essentials!");
             return null;
         }
-        // if (Ingredients.Count == 1)
-        // {
-            
-        // }
 
-        return this;        
+        if (Ingredients.Count == 1)
+        {
+            Console.WriteLine("Espresso");
+            return this;        
+        }
+        else if (Ingredients.Count == 2)
+        {
+            if (Ingredients.FindAll(i => i == "water").ToList().Count() == 2)
+            {
+                Console.WriteLine("Americano");
+                return this;
+            }
+            else if (Ingredients.Contains("milk foam"))
+            {
+                Console.WriteLine("Macchiato");
+                return this;
+
+            }
+            else if (Ingredients.Contains("milk"))
+            {
+                Console.WriteLine("Latte");
+                return this;
+            }
+        }
+        else if (Ingredients.Count == 3 && Ingredients.Contains("milk"))
+        {
+            if (Ingredients.Contains("milk foam"))
+            {
+                Console.WriteLine("Cappuccino");
+                return this;
+            }
+            else if (Ingredients.Contains("chocolate"))
+            {
+                Console.WriteLine("Mocha");
+                return this;
+            }
+
+        }
+        Console.WriteLine("Go AWAY");
+
+
+        return this;
+
+
     }
+
+    public IBeverage MyIngredients()
+    {
+        foreach (var i in Ingredients)
+        {
+            Console.WriteLine(i);
+        }
+        Console.WriteLine(this.Bean.Sort);
+        return this;
+    }
+
 }
 public class Bean
 {
@@ -104,13 +155,13 @@ public class Ingredient
 
 }
 
-class Latte: FluentEspresso
-{
-    public Latte() : base (new List<Ingredient>() { "Milk" })
-    {
+//class Latte: FluentEspresso
+//{
+//    public Latte() : base (new List<Ingredient>() { "Milk" })
+//    {
 
-    }
-}
+//    }
+//}
 
 
 //class Espresso : IBeverage
