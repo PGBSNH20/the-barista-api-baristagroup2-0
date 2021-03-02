@@ -7,7 +7,7 @@ public interface IBeverage{
     string CupType { get; }
 
     IBeverage AddWater(int amountWater);
-    IBeverage AddBeans(int amount ,Bean.CoffeSort sort);
+    IBeverage AddBeans(Bean bean);
     IBeverage AddMilk();
     IBeverage Validate(int temperature);
     IBeverage AddMilkFoam();
@@ -24,21 +24,23 @@ public class FluentEspresso : IBeverage
     public string CupType => throw new System.NotImplementedException();
 
     List<Ingredient> Ingredients { get; set; }
-    Bean bean { get; set; }
+    public Bean Bean { get; private set; }
+
     public FluentEspresso()
     {
         // Start method
         Ingredients = new List<Ingredient>();
     }
+    //public FluentEspresso()
+    //{
+    //    bean = new Bean();
+    //}
 
-    public IBeverage AddBeans(int amount, Bean.CoffeSort sort)
+    public IBeverage AddBeans(Bean bean)
     {
-        Bean bean = new Bean() { AmountInG = amount, Sort = sort };
-        this.bean = bean;
-
-
-
+        Bean = bean;
         return this;
+
     }
 
     public IBeverage AddMilk()
@@ -107,6 +109,14 @@ public class Ingredient
     public int? Amount { get; set; }
     public string Name { get; set; }
 
+}
+
+class Latte: FluentEspresso
+{
+    public Latte() : base (new List<Ingredient>() { "Milk" })
+    {
+
+    }
 }
 
 
