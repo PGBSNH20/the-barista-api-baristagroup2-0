@@ -8,6 +8,7 @@ public interface IBeverage{
     IBeverage AddBeans(int bean);
     IBeverage AddMilk();
 
+    IBeverage ToBeverage();
    
 }
 
@@ -19,25 +20,33 @@ class Espresso : IBeverage
     public string CupType => throw new System.NotImplementedException();
 
   
-    public IBeverage AddWater(int amountOfWater)
+    public IBeverage AddWater(int amountOfWater) //Method for adding. i.e "withLegs"
     {
         ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 30, Name = "Water" });
         return this;
 
     }
 
-    public IBeverage AddBeans(int bean)
+    public IBeverage AddBeans(int bean, string beanName) //Adding beans
     {
-        throw new System.NotImplementedException();
+        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 7, Name = "Arabica" });
+        return this;
     }
 
-    public IBeverage AddMilk()
+    public IBeverage AddMilk() //Add milk? 
     {
-        throw new System.NotImplementedException();
+        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 1, Name = "Milk" });
+        return this;
     }
+
+    public IBeverage ToBeverage()
+    {
+
+    }
+}
 
    
-}
+
 
 class Latte : IBeverage
 {
