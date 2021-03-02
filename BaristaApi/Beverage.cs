@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public interface IBeverage{
 	
@@ -9,8 +10,10 @@ public interface IBeverage{
     IBeverage AddBeans(int amount ,Bean.CoffeSort sort);
     IBeverage AddMilk();
     IBeverage Validate(int temperature);
+    IBeverage AddMilkFoam();
+    IBeverage AddChocolateSyrup();
 
-    void ToBeverage();
+    IBeverage ToBeverage();
 
  
 
@@ -28,15 +31,13 @@ public class FluentEspresso : IBeverage
         Ingredients = new List<Ingredient>();
     }
 
-    
-
-
     public IBeverage AddBeans(int amount, Bean.CoffeSort sort)
     {
         Bean bean = new Bean() { AmountInG = amount, Sort = sort };
         this.bean = bean;
 
-        
+
+
         return this;
     }
 
@@ -52,19 +53,39 @@ public class FluentEspresso : IBeverage
         return this;
     }
 
-    public void ToBeverage()
+    public IBeverage AddMilkFoam()
     {
-        foreach (var i in Ingredients)
-        {
-            Console.WriteLine($"{i.Name} and {i.Amount}");
-
-        }
+        throw new NotImplementedException();
     }
+
+    public IBeverage AddChocolateSyrup()
+    {
+        throw new NotImplementedException();
+    }
+
 
     public IBeverage Validate(int temperature)
     {
         Ingredients.Add(new Ingredient() { Amount = temperature, Name = "Temperature" });
         return this;
+
+    }
+
+    IBeverage IBeverage.ToBeverage()
+    {
+        //var drink = "";
+
+        if (Ingredients.Exists(i => i.Name == "Water") && Ingredients.Exists(i => i.Amount > 1))
+        {
+            return this;
+        }
+        else
+        {
+            Console.WriteLine("Fill water");
+            return null;
+
+        }
+
         
     }
 }
@@ -81,7 +102,7 @@ public class Bean
 
 }
 
-class Ingredient
+public class Ingredient 
 {
     public int? Amount { get; set; }
     public string Name { get; set; }
