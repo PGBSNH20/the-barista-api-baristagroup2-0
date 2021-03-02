@@ -1,17 +1,21 @@
 using System;
 
-public interface H2O{
+public interface H2O
+{
 
 }
 
-public class Ice{
+public class Ice
+{
 
 }
 
-public class Water{
+public class Water
+{
 
 }
 
-public class Steam{
+public class Steam
+{
 
 }
