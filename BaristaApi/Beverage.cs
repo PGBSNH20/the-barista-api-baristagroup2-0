@@ -9,27 +9,22 @@ public interface IBeverage{
     IBeverage AddWater(int amountWater);
     IBeverage AddBeans(Bean bean);
     IBeverage AddMilk();
-    IBeverage Validate(int temperature);
+    // IBeverage Validate(int temperature);
     IBeverage AddMilkFoam();
-    IBeverage AddChocolateSyrup();
-
+    IBeverage AddChocolate();
     IBeverage ToBeverage();
-
- 
-
-
 }
 public class FluentEspresso : IBeverage
 {
     public string CupType => throw new System.NotImplementedException();
 
-    List<Ingredient> Ingredients { get; set; }
+    List<string> Ingredients { get; set; }
     public Bean Bean { get; private set; }
 
     public FluentEspresso()
     {
         // Start method
-        Ingredients = new List<Ingredient>();
+        Ingredients = new List<string>();
     }
     //public FluentEspresso()
     //{
@@ -45,50 +40,48 @@ public class FluentEspresso : IBeverage
 
     public IBeverage AddMilk()
     {
-        Ingredients.Add(new Ingredient() { Amount = null , Name = "Milk" });
+        Ingredients.Add("milk");
         return this;
     }
 
     public IBeverage AddWater(int amountWater)
     {
-        Ingredients.Add(new Ingredient() { Amount = amountWater, Name = "Water" });
+        Ingredients.Add("water");
         return this;
     }
 
     public IBeverage AddMilkFoam()
     {
-        throw new NotImplementedException();
-    }
-
-    public IBeverage AddChocolateSyrup()
-    {
-        throw new NotImplementedException();
-    }
-
-
-    public IBeverage Validate(int temperature)
-    {
-        Ingredients.Add(new Ingredient() { Amount = temperature, Name = "Temperature" });
+        Ingredients.Add("milk foam");
         return this;
-
     }
 
-    IBeverage IBeverage.ToBeverage()
+    public IBeverage AddChocolate()
     {
-        //var drink = "";
+        Ingredients.Add("choclate");
+        return this;
+    }
 
-        if (Ingredients.Exists(i => i.Name == "Water") && Ingredients.Exists(i => i.Amount > 1))
+
+    // public IBeverage Validate(int temperature)
+    // {
+    //     Ingredients.Add(temperature.ToString());
+    //     return this;
+    // }
+    IBeverage ToBeverage()
+    {
+
+        if (!Ingredients.Contains("water") || this.Bean == null)
         {
-            return this;
-        }
-        else
-        {
-            Console.WriteLine("Fill water");
+            System.Console.WriteLine("You failed to add the essentials!");
             return null;
-
         }
+        // if (Ingredients.Count == 1)
+        // {
+            
+        // }
 
-        
+        return this;        
     }
 }
 public class Bean

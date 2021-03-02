@@ -10,7 +10,7 @@ namespace BaristaApi
 
             IBeverage espresso = new FluentEspresso()
                  .AddWater(5)
-                 .AddBeans(5, Bean.CoffeSort.Robusta)
+                 .AddBeans(new Bean(){AmountInG = 5, Sort = Bean.CoffeSort.Robusta})
                  .ToBeverage();
 
             Console.WriteLine(espresso);
