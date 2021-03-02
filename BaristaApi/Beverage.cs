@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 public interface IBeverage{
 	
@@ -8,52 +9,111 @@ public interface IBeverage{
     IBeverage AddBeans(int bean);
     IBeverage AddMilk();
 
-    IBeverage ToBeverage();
-   
+    void ToBeverage();
+
+ 
+
+
 }
-
-
-class Espresso : IBeverage
+public class FluentEspresso : IBeverage
 {
-    private IEnumerable<Ingredient> Ingredients { get; set; }
-
     public string CupType => throw new System.NotImplementedException();
 
-  
-    public IBeverage AddWater(int amountOfWater) //Method for adding. i.e "withLegs"
+    List<Ingredient> Ingredients { get; set; }
+    public FluentEspresso()
     {
-        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 30, Name = "Water" });
-        return this;
-
+        // Start method
+        Ingredients = new List<Ingredient>();
+        //Name = name;
     }
 
-    public IBeverage AddBeans(int bean, string beanName) //Adding beans
+    
+
+
+    public IBeverage AddBeans(int bean)
     {
-        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 7, Name = "Arabica" });
+        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 7, Name = "Bean" });
         return this;
     }
 
-    public IBeverage AddMilk() //Add milk? 
+    public IBeverage AddMilk()
     {
         ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 1, Name = "Milk" });
         return this;
     }
 
-    public IBeverage ToBeverage()
+    public IBeverage AddWater(int amountWater)
     {
-
+        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 30, Name = "Water" });
+        return this;
     }
+
+    public void ToBeverage()
+    {
+        foreach (var i in Ingredients)
+        {
+            Console.WriteLine($"{i.Name} and {i.Amount}");
+
+        }
+    }
+
 }
 
-   
-
-
-class Latte : IBeverage
+class Ingredient
 {
+    public int Amount { get; set; }
+    public string Name { get; set; }
 
-    public List<string> Ingredients => throw new System.NotImplementedException();
-
-    public string CupType => throw new System.NotImplementedException();
-
-   
 }
+
+
+//class Espresso : IBeverage
+//{
+//    public string CupType => throw new System.NotImplementedException();
+
+//    private IEnumerable<Ingredient> Ingredients { get; set; }
+//    IBeverage espresso = new FluentEspresso()
+//       .AddWater(20)
+//       .AddWater(5)
+//       .AddMilk()
+//       .ToBeverage();
+
+
+//}
+
+
+//class Latte : IBeverage
+//{
+
+//    public List<string> Ingredients => throw new System.NotImplementedException();
+
+//    public string CupType => throw new System.NotImplementedException();
+
+
+//}
+
+
+/*
+IBeverage espresso = new FluentEspresso()
+                         .AddWater(20)
+                         .AddBeans(new Bean(){ 
+                             AmountInG = 5,
+                             Sort = CoffeSorts.Robusta})
+                         .Validate(e => e.Temerature > 90)
+                     .ToBeverage();
+// espresso is type of Espresso
+
+IBeverage latte = new FluentEspresso()
+                         .AddBeans(new Bean(){ 
+                             AmountInG = 5,
+                             Sort = CoffeSorts.Robusta})
+                         .GrindBeans()
+                         .AddWater(20)
+                         .AddMilk()
+                         .Validate(e => e.Temerature < 80)
+                     .ToBeverage();
+// latte is type of Latte
+*/
+
+
+

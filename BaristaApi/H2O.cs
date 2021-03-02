@@ -3,6 +3,7 @@ using System;
 public interface IH2O
 {
     public IH2O setTemp(int temp);
+
 }
 
 public class Water : IH2O
