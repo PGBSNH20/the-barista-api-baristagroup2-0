@@ -6,8 +6,9 @@ public interface IBeverage{
     string CupType { get; }
 
     IBeverage AddWater(int amountWater);
-    IBeverage AddBeans(int bean);
+    IBeverage AddBeans(int amount ,Bean.CoffeSort sort);
     IBeverage AddMilk();
+    IBeverage Validate(int temperature);
 
     void ToBeverage();
 
@@ -20,31 +21,34 @@ public class FluentEspresso : IBeverage
     public string CupType => throw new System.NotImplementedException();
 
     List<Ingredient> Ingredients { get; set; }
+    Bean bean { get; set; }
     public FluentEspresso()
     {
         // Start method
         Ingredients = new List<Ingredient>();
-        //Name = name;
     }
 
     
 
 
-    public IBeverage AddBeans(int bean)
+    public IBeverage AddBeans(int amount, Bean.CoffeSort sort)
     {
-        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 7, Name = "Bean" });
+        Bean bean = new Bean() { AmountInG = amount, Sort = sort };
+        this.bean = bean;
+
+        
         return this;
     }
 
     public IBeverage AddMilk()
     {
-        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 1, Name = "Milk" });
+        Ingredients.Add(new Ingredient() { Amount = null , Name = "Milk" });
         return this;
     }
 
     public IBeverage AddWater(int amountWater)
     {
-        ((List<Ingredient>)Ingredients).Add(new Ingredient() { Amount = 30, Name = "Water" });
+        Ingredients.Add(new Ingredient() { Amount = amountWater, Name = "Water" });
         return this;
     }
 
@@ -57,11 +61,29 @@ public class FluentEspresso : IBeverage
         }
     }
 
+    public IBeverage Validate(int temperature)
+    {
+        Ingredients.Add(new Ingredient() { Amount = temperature, Name = "Temperature" });
+        return this;
+        
+    }
+}
+public class Bean
+{
+    public int? AmountInG { get; set; }
+    public CoffeSort Sort { get; set; }
+    public enum CoffeSort
+    {
+        Robusta,
+        Arabica,
+    }
+
+
 }
 
 class Ingredient
 {
-    public int Amount { get; set; }
+    public int? Amount { get; set; }
     public string Name { get; set; }
 
 }
@@ -69,14 +91,7 @@ class Ingredient
 
 //class Espresso : IBeverage
 //{
-//    public string CupType => throw new System.NotImplementedException();
-
-//    private IEnumerable<Ingredient> Ingredients { get; set; }
-//    IBeverage espresso = new FluentEspresso()
-//       .AddWater(20)
-//       .AddWater(5)
-//       .AddMilk()
-//       .ToBeverage();
+//   
 
 
 //}
