@@ -119,6 +119,12 @@ public class FluentEspresso : IEspresso
 
     public IBeverage ToBeverage()
     {
+        foreach (var i in Ingredients)
+        {
+
+
+        }
+
 
         if (!Ingredients.Contains(Ingredient.Water) || this.Bean == null)
         {
