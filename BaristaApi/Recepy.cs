@@ -21,7 +21,7 @@ namespace BaristaApi
             {
                 new Recepy()
                 {
-                    type = typeof(Espresso),
+                    type = typeof(Amerecano),
                     Ingredients = new List<Ingredient>()
                     {
                         Ingredient.Espresso,

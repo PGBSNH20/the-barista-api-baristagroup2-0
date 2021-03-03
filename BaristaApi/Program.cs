@@ -19,30 +19,43 @@ namespace BaristaApi
             Console.WriteLine();
 
 
+            var recepies = RecepyCollection.Recepies;
+            var orginalIngridientLists = new List<List<Ingredient>>();
 
-
-
-            var lista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
-            var listan = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup, Ingredient.MilkFoam };
-
-            var intersected = lista.Intersect(listan).ToList().Count();
-
-            var dubbelLista = new List<List<Ingredient>>() { lista, listan };
-            var enkelLista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
-
-
-            for (int i = 0; i < dubbelLista.Count; i++)
-            
+            foreach (var r in recepies)
             {
-                
-                 int x = enkelLista.Intersect(dubbelLista[i]).ToList().Count();
-                if (enkelLista.Count() == x && x == dubbelLista[i].Count())
+                orginalIngridientLists.Add(r.Ingredients);
+            }
+
+            var fromBarista = new List<Ingredient>() { Ingredient.Espresso, Ingredient.Water};
+
+            for (int i = 0; i < orginalIngridientLists.Count; i++)
+            { 
+                var trueIngridients = orginalIngridientLists[i];
+                int matching = fromBarista.Intersect(trueIngridients).Count();
+
+                if (matching == fromBarista.Count && matching == trueIngridients.Count)
                 {
-                    Console.WriteLine(i);
+                    Console.WriteLine(recepies[i].type);
                 }
+            }
+
+            //var lista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
+            //var listan = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup, Ingredient.MilkFoam };
+
+            //var intersected = lista.Intersect(listan).ToList().Count();
+
+            //var dubbelLista = new List<List<Ingredient>>() { lista, listan };
+            //var enkelLista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
+
+
+            //for (int i = 0; i < dubbelLista.Count; i++)
+            //{
+                
+              
               
 
-            }
+            //}
 
 
             Console.ReadKey();
