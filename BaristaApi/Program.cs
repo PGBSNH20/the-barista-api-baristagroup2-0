@@ -18,30 +18,36 @@ namespace BaristaApi
                  .ToBeverage();
             Console.WriteLine();
 
-            IBeverage latte = new FluentEspresso()
-               .AddWater(5)
-               .AddBeans(new Bean() { AmountInG = 5, Sort = CoffeSort.Robusta })
-               .AddMilk()
-               .MyIngredients()
-               .ToBeverage();
 
-            Console.WriteLine();
 
-            IBeverage americano = new FluentEspresso()
-               .AddWater(20)
-               .AddWater(5)
-               .AddBeans(new Bean() { AmountInG = 5, Sort = CoffeSort.Robusta })
-               .MyIngredients()
-               .ToBeverage();
+
+
 
             var lista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
-            var listan = new List<Ingredient> { Ingredient.Milk, Ingredient.Espresso };
+            var listan = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup, Ingredient.MilkFoam };
 
             var intersected = lista.Intersect(listan).ToList().Count();
 
-           
+            var dubbelLista = new List<List<Ingredient>>() { lista, listan };
+            var enkelLista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
 
-         
+
+            for (int i = 0; i < dubbelLista.Count; i++)
+            
+            {
+                
+                 int x = enkelLista.Intersect(dubbelLista[i]).ToList().Count();
+                if (enkelLista.Count() == x && x == dubbelLista[i].Count())
+                {
+                    Console.WriteLine(i);
+                }
+              
+
+            }
+
+
+            Console.ReadKey();
+
             //Console.WriteLine(espresso);
 
 
