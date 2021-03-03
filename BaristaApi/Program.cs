@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BaristaApi
 {
@@ -31,6 +33,13 @@ namespace BaristaApi
                .AddBeans(new Bean() { AmountInG = 5, Sort = CoffeSort.Robusta })
                .MyIngredients()
                .ToBeverage();
+
+            var lista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
+            var listan = new List<Ingredient> { Ingredient.Milk, Ingredient.Espresso };
+
+            var intersected = lista.Intersect(listan).ToList().Count();
+
+           
 
          
             //Console.WriteLine(espresso);
