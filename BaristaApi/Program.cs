@@ -22,7 +22,6 @@ namespace BaristaApi
 
 
 
-
             var lista = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup };
             var listan = new List<Ingredient> { Ingredient.Milk, Ingredient.ChocolateSyrup, Ingredient.MilkFoam };
 
