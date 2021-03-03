@@ -18,7 +18,7 @@ namespace BaristaApi
 
             IBeverage latte = new FluentEspresso()
                .AddWater(5)
-               .AddBeans(new Bean() { AmountInG = 5, Sort = Bean.CoffeSort.Robusta })
+               //.AddBeans(new Bean() { AmountInG = 5, Sort = Bean.CoffeSort.Robusta })
                .AddMilk()
                .MyIngredients()
                .ToBeverage();
@@ -26,7 +26,7 @@ namespace BaristaApi
             Console.WriteLine();
 
             IBeverage americano = new FluentEspresso()
-               .AddWater(5)
+               .AddWater(20)
                .AddWater(5)
                .AddBeans(new Bean() { AmountInG = 5, Sort = Bean.CoffeSort.Robusta })
                .MyIngredients()
