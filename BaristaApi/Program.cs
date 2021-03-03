@@ -36,6 +36,7 @@ namespace BaristaApi
 
                 if (matching == fromBarista.Count && matching == trueIngridients.Count)
                 {
+                    //ObjectType instance = Activator.CreateInstance<ObjectType>();
                     Console.WriteLine(recepies[i].type);
                 }
             }
