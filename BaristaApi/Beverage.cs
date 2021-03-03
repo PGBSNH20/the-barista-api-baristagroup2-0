@@ -2,6 +2,25 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
+
+public enum CoffeSort
+{
+    Robusta,
+    Arabica,
+}
+
+// Spy CoffeShopTeam
+public enum Ingredient
+{
+    Water,
+    Milk,
+    MilkFoam,
+    ChocolateSyrup,
+    Espresso
+
+
+}
+
 public interface IBeverage
 {
 
@@ -25,20 +44,23 @@ public interface IEspresso
 }
 
 
-
 public class FluentEspresso : IEspresso
 {
     public string CupType => throw new System.NotImplementedException();
 
-    List<string> Ingredients { get; set; }
+    List<Ingredient> Ingredients { get; set; }
     public Bean Bean { get; private set; }
 
     public FluentEspresso()
     {
         // Start method
-        Ingredients = new List<string>();
+        Ingredients = new List<Ingredient>();
     }
   
+    public FluentEspresso(List<Ingredient> ingredients)
+    {
+        Ingredients = ingredients;
+    }
 
     public IEspresso AddBeans(Bean bean)
     {
@@ -48,25 +70,25 @@ public class FluentEspresso : IEspresso
 
     public IEspresso AddMilk()
     {
-        Ingredients.Add("milk");
+        Ingredients.Add(Ingredient.Milk);
         return this;
     }
 
     public IEspresso AddWater(int amountWater)
     {
-        Ingredients.Add("water");
+        Ingredients.Add(Ingredient.Water);
         return this;
     }
 
     public IEspresso AddMilkFoam()
     {
-        Ingredients.Add("milk foam");
+        Ingredients.Add(Ingredient.MilkFoam);
         return this;
     }
 
     public IEspresso AddChocolate()
     {
-        Ingredients.Add("choclate");
+        Ingredients.Add(Ingredient.ChocolateSyrup);
         return this;
     }
 
@@ -98,7 +120,7 @@ public class FluentEspresso : IEspresso
     public IBeverage ToBeverage()
     {
 
-        if (!Ingredients.Contains("water") || this.Bean == null)
+        if (!Ingredients.Contains(Ingredient.Water) || this.Bean == null)
         {
             System.Console.WriteLine("You failed to add the essentials!");
             return null;
@@ -110,27 +132,27 @@ public class FluentEspresso : IEspresso
         }
         else if (Ingredients.Count == 2)
         {
-            if (Ingredients.FindAll(i => i == "water").ToList().Count() == 2)
+            if (Ingredients.FindAll(i => i == Ingredient.Water).ToList().Count() == 2)
             {
                 return new Amerecano();
             }
-            else if (Ingredients.Contains("milk foam"))
+            else if (Ingredients.Contains(Ingredient.MilkFoam))
             {
                 return new Macchiato();
 
             }
-            else if (Ingredients.Contains("milk"))
+            else if (Ingredients.Contains(Ingredient.Milk))
             {
                 return new Latte();
             }
         }
-        else if (Ingredients.Count == 3 && Ingredients.Contains("milk"))
+        else if (Ingredients.Count == 3 && Ingredients.Contains(Ingredient.Milk))
         {
-            if (Ingredients.Contains("milk foam"))
+            if (Ingredients.Contains(Ingredient.MilkFoam))
             {
                 return new Cappuccino();
             }
-            else if (Ingredients.Contains("chocolate"))
+            else if (Ingredients.Contains(Ingredient.ChocolateSyrup))
             {
                 return new Mocha();
             }
@@ -166,29 +188,27 @@ public class Macchiato : IBeverage
 public class Mocha : IBeverage
 {
     public string Price => "20 kr";
+    
 }
-public class Espresso : IBeverage
+class Espresso : IBeverage
 {
     public string Price => "20 kr";
+    
 }
 
 public class Bean
 {
     public int? AmountInG { get; set; }
     public CoffeSort Sort { get; set; }
-    public enum CoffeSort
-    {
-        Robusta,
-        Arabica,
-    }
+   
 }
 
-public class Ingredient
-{
-    public int? Amount { get; set; }
-    public string Name { get; set; }
+//public class Ingredient
+//{
+//    public int? Amount { get; set; }
+//    public string Name { get; set; }
 
-}
+//}
 
 //class Latte: FluentEspresso
 //{
