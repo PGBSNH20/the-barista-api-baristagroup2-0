@@ -14,12 +14,11 @@ namespace BaristaApi
         {
             Ingredients = new List<Ingredient>();
         }
-
-        public FluentEspresso(List<Ingredient> ingredients)
+        public IEspresso FillWater()
         {
-            Ingredients = ingredients;
+            Console.WriteLine("Coffe machine filled");
+            return this;
         }
-
         public IEspresso AddBeans(Bean bean)
         {
             Bean = bean;
@@ -74,10 +73,6 @@ namespace BaristaApi
             return this;
         }
 
-        public IEspresso FillWater()
-        {
-            Console.WriteLine("Coffe machine filled");
-            return this;
-        }
+
     }
 }
