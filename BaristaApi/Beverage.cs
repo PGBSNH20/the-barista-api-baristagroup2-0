@@ -72,7 +72,8 @@ namespace BaristaApi
         { 
             Ingredient.Espresso,
             Ingredient.ChocolateSyrup,
-            Ingredient.Milk };
+            Ingredient.Milk
+        };
     }
     public class Espresso : IBeverage
     {
