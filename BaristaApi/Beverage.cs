@@ -39,29 +39,49 @@ namespace BaristaApi
         };
     }
 
-    public class Cappuccino : IBeverage { public string Price => "20 kr"; public List<Ingredient> Ingredients { get; } = new List<Ingredient> { Ingredient.Milk, Ingredient.MilkFoam }; }
-    public class Amerecano : IBeverage { public string Price => "20 kr"; public List<Ingredient> Ingredients { get; } = new List<Ingredient> { Ingredient.Water }; }
+    public class Cappuccino : IBeverage
+    {
+        public string Price => "20 kr";
+        public List<Ingredient> Ingredients { get; } = new List<Ingredient> 
+        {
+            Ingredient.Espresso,
+            Ingredient.Milk,
+            Ingredient.MilkFoam
+        };
+    }
+    public class Amerecano : IBeverage 
+    { public string Price => "20 kr"; 
+        public List<Ingredient> Ingredients { get; } = new List<Ingredient> 
+        {
+            Ingredient.Espresso,
+            Ingredient.Water
+        };
+    }
     public class Macchiato : IBeverage
     {
         public string Price => "20 kr";
         public List<Ingredient> Ingredients { get; } = new List<Ingredient>()
         {
-        Ingredient.MilkFoam
+            Ingredient.MilkFoam
         };
     }
     public class Mocha : IBeverage
     {
         public string Price => "20 kr";
-        public List<Ingredient> Ingredients { get; } = new List<Ingredient> { Ingredient.Espresso, Ingredient.ChocolateSyrup, Ingredient.Milk };
+        public List<Ingredient> Ingredients { get; } = new List<Ingredient>
+        { 
+            Ingredient.Espresso,
+            Ingredient.ChocolateSyrup,
+            Ingredient.Milk };
     }
-    class Espresso : IBeverage
+    public class Espresso : IBeverage
     {
         public string Price => "20 kr";
         public List<Ingredient> Ingredients { get; } = new List<Ingredient>
         {
-            Ingredient.Water,
+            Ingredient.Espresso,
         };
 
     }
-   
+
 }
