@@ -18,23 +18,25 @@ namespace UnitTestingJoakim
             Assert.IsType<Latte>(latteTest);
         }
         [Fact]
-        public void AddMilk_GetMocha()
+        public void AddMilkAndChocolate_GetMocha()
         {
             IBeverage mochaTest = new FluentEspresso()
                 .FillWater()
                 .AddBeans(new Bean() { AmountInG = 2, Sort = CoffeSort.Arabica })
                 .PourEspresso()
                 .AddMilk()
+                .AddChocolate()
                 .ToBeverage();
-            Assert.Equal()
+            Assert.IsType<Mocha>(mochaTest);
         }
         [Fact]
-        public void TestFillWater()
+        public void CheckBeans()
         {
-            IBeverage fillTest = new FluentEspresso()
+            IBeverage beanTest = new FluentEspresso()
                 .FillWater()
+                .AddBeans(new Bean() { AmountInG  = 10, Sort = CoffeSort.Robusta })
                 .ToBeverage();
-            Assert.Equal()
+            Assert.NotNull(beanTest);
         }
     }
 }
