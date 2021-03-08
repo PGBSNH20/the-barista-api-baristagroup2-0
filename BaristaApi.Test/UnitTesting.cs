@@ -1,7 +1,7 @@
 ﻿using BaristaApi;
 using Xunit;
 
-namespace UnitTestingJoakim
+namespace UnitTesting
 {
     public class FluentApiTests
     {
@@ -30,13 +30,24 @@ namespace UnitTestingJoakim
             Assert.IsType<Mocha>(mochaTest);
         }
         [Fact]
-        public void CheckBeans()
+        public void ExpectWrongBeverage ()
         {
-            IBeverage beanTest = new FluentEspresso()
+            IBeverage notAmericano = new FluentEspresso()
                 .FillWater()
-                .AddBeans(new Bean() { AmountInG  = 10, Sort = CoffeSort.Robusta })
+                .AddBeans(new Bean() { AmountInG = 10, Sort = CoffeSort.Robusta })
+                .PourEspresso()
+                .AddMilk()
                 .ToBeverage();
-            Assert.NotNull(beanTest);
+            Assert.IsNotType<Amerecano>(notAmericano);
+        }
+        [Fact]
+        public void NullRecepieTest()
+        {
+            IBeverage chocolateMilk = new FluentEspresso()
+                .AddMilk()
+                .AddChocolate()
+                .ToBeverage();
+            Assert.Null(chocolateMilk);
         }
     }
 }
